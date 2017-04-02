@@ -34,7 +34,8 @@ namespace dotnet
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole(LogLevel.Debug);
             loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
@@ -51,6 +52,11 @@ namespace dotnet
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                        name: "Redirect Account",
+                        template: "Account/{action}",
+                        defaults: new { Controller = "Account", Action = "Register" }
+                    );
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

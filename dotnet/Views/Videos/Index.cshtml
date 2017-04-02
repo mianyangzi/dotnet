@@ -1,0 +1,23 @@
+﻿@model ICollection<dotnet.Model.Video>
+
+<h2>Vincet Video</h2>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>time</th>        
+    </tr>
+    @foreach(var video in Model)
+    {
+        <tr>
+            <td>
+                <a href="@video.Url">
+                    @video.Title
+                </a>
+            </td>
+            <td>
+                @video.PublishDate
+            </td>
+        </tr>
+    }
+</table>
